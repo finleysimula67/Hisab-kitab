@@ -1,0 +1,136 @@
+{% extends "transactions/base.html" %}
+{% load static %}
+
+{% block title %}Create Account | Hisab-Kitab{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'transactions/auth.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="auth-page">
+    <div class="auth-layout">
+
+        <aside class="auth-intro">
+            <div class="auth-brand">
+                <div class="auth-brand-logo" aria-hidden="true">
+                    <span class="auth-brand-h">H</span><span class="auth-brand-k">K</span>
+                </div>
+                <span>Hisab-Kitab</span>
+            </div>
+
+            <div class="auth-brand-description">
+                <div class="auth-eyebrow">Your money, organized</div>
+
+                <h2>Build better money habits, <span class="auth-highlight">one day at a time.</span></h2>
+
+                <p>
+                    Keep your income, expenses, and monthly balance
+                    organized in one simple personal finance dashboard.
+                </p>
+
+                <div class="auth-benefits">
+                    <div class="auth-benefit">
+                        <span class="auth-benefit-icon" aria-hidden="true">✓</span>
+                        Track income and everyday expenses
+                    </div>
+                    <div class="auth-benefit">
+                        <span class="auth-benefit-icon" aria-hidden="true">✓</span>
+                        Review your monthly financial activity
+                    </div>
+                    <div class="auth-benefit">
+                        <span class="auth-benefit-icon" aria-hidden="true">✓</span>
+                        Keep your transactions organized
+                    </div>
+                </div>
+            </div>
+
+            <div class="auth-intro-footer">
+                Simple records. Clearer decisions.
+            </div>
+        </aside>
+
+        <div class="auth-form-panel">
+            <div class="auth-form-header">
+                <h1>Create your account</h1>
+                <p>Set up your account to start tracking your finances.</p>
+            </div>
+
+            <form method="post" class="auth-form">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                <div class="auth-alert" role="alert">
+                    {{ form.non_field_errors }}
+                </div>
+                {% endif %}
+
+                {% for field in form %}
+                <div class="auth-field">
+                    <label for="{{ field.id_for_label }}" class="form-label">
+                        {{ field.label }}
+                    </label>
+
+                    {% if field.name == "password1" or field.name == "password2" %}
+                    <div class="auth-password-wrap">
+                        {{ field }}
+                        <button type="button" class="auth-password-toggle"
+                            data-password-toggle="{{ field.id_for_label }}" aria-label="Show password"
+                            aria-pressed="false">Show</button>
+                    </div>
+                    {% else %}
+                    {{ field }}
+                    {% endif %}
+
+                    {% if field.help_text %}
+                    <div class="auth-field-help">
+                        {{ field.help_text|safe }}
+                    </div>
+                    {% endif %}
+
+                    {% for error in field.errors %}
+                    <div class="auth-field-error" role="alert">
+                        {{ error }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+
+                <button type="submit" class="auth-submit">
+                    Create account
+                </button>
+            </form>
+
+            <p class="auth-switch">
+                Already have an account?
+                <a href="{% url 'login' %}">Log in</a>
+            </p>
+
+            <div class="auth-secure-note">
+                <span class="auth-secure-dot" aria-hidden="true"></span>
+                Your account is protected by Django authentication.
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.querySelectorAll("[data-password-toggle]").forEach((button) => {
+        button.addEventListener("click", () => {
+            const input = document.getElementById(
+                button.dataset.passwordToggle
+            );
+
+            if (!input) return;
+
+            const showPassword = input.type === "password";
+            input.type = showPassword ? "text" : "password";
+            button.textContent = showPassword ? "Hide" : "Show";
+            button.setAttribute("aria-label", showPassword ? "Hide password" : "Show password");
+            button.setAttribute("aria-pressed", String(showPassword));
+        });
+    });
+</script>
+{% endblock %}

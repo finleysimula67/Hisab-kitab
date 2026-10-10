@@ -1,0 +1,429 @@
+/* =========================
+   Base layout
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 24px;
+    background: #f5f7fa;
+    color: #1f2937;
+}
+
+.header,
+.cards,
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.header {
+    flex-wrap: wrap;
+}
+
+.cards {
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+/* =========================
+   Summary cards
+========================= */
+
+.card,
+.panel {
+    background: #ffffff;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px #0000000a;
+}
+
+.cards .card {
+    flex: 1 1 200px;
+    min-width: 0;
+}
+
+.amount {
+    font-size: 24px;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}
+
+.income {
+    color: #15803d;
+}
+
+.expense {
+    color: #b91c1c;
+}
+
+/* =========================
+   Buttons
+========================= */
+
+a.button {
+    display: inline-block;
+    background: #2563eb;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 11px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+a.button:hover {
+    background: #1d4ed8;
+}
+/* Brand and logo */
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.brand-logo {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #ffffff;
+    font-size: 29px;
+    font-weight: 800;
+    box-shadow: 0 5px 12px #2563eb30;
+}
+
+.brand-logo-accent {
+    position: absolute;
+    right: 5px;
+    bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 17px;
+    height: 17px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    background: #16a34a;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.brand-text h1 {
+    margin: 0;
+}
+
+.brand-text p {
+    margin: 6px 0 0;
+    color: #6b7280;
+}
+
+/* Hisab-Kitab brand colors */
+.brand-text h1 {
+    margin: 0;
+    color: #1F2937;
+    font-weight: 700;
+}
+
+.brand-h {
+    color: #2563EB;
+}
+
+.brand-k {
+    color: #16A34A;
+}
+
+.brand-text p {
+    margin: 6px 0 0;
+    color: #6B7280;
+}
+
+@media (max-width: 600px) {
+    .brand-logo {
+        width: 46px;
+        height: 46px;
+        font-size: 25px;
+    }
+
+    .brand-logo-accent {
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+    }
+}
+/* =========================
+   Transaction filters
+========================= */
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 14px;
+    margin: 20px 0 28px;
+    padding: 18px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px #00000005;
+}
+
+.filters input,
+.filters select {
+    min-width: 0;
+    max-width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #1f2937;
+    font: inherit;
+}
+
+.filters input:focus,
+.filters select:focus {
+    outline: 2px solid #bfdbfe;
+    border-color: #2563eb;
+}
+
+.filters input[type="search"] {
+    flex: 2 1 220px;
+}
+
+.filters select {
+    flex: 1 1 135px;
+}
+
+.filters label {
+    display: flex;
+    flex: 1 1 145px;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+    color: #4b5563;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.filters button {
+    padding: 11px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #ffffff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+}
+
+.filters button:hover {
+    background: #1d4ed8;
+}
+
+.filters a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 4px;
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.filters a:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   Transaction table
+========================= */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+table {
+    width: 100%;
+    min-width: 800px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background: #ffffff;
+}
+
+th,
+td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+    vertical-align: middle;
+}
+
+th {
+    background: #f9fafb;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+td {
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+th:nth-child(1),
+td:nth-child(1) {
+    width: 20%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    width: 17%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+    width: 16%;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+    width: 16%;
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+    width: 31%;
+}
+
+tbody tr:hover {
+    background: #f9fafb;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* =========================
+   Transaction types and actions
+========================= */
+
+.type-income {
+    color: #15803d;
+    font-weight: bold;
+}
+
+.type-expense {
+    color: #b91c1c;
+    font-weight: bold;
+}
+
+.transaction-amount {
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.actions {
+    white-space: nowrap;
+}
+
+.actions a {
+    display: inline-block;
+    margin: 3px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.view-link {
+    color: #0f766e;
+}
+
+.edit-link {
+    color: #2563eb;
+}
+
+.delete-link {
+    color: #b91c1c;
+}
+
+.view-link:hover,
+.edit-link:hover,
+.delete-link:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   Empty state
+========================= */
+
+.empty {
+    padding: 24px 0;
+    color: #6b7280;
+}
+
+/* =========================
+   Responsive layout
+========================= */
+
+@media (max-width: 700px) {
+    body {
+        margin: 24px auto;
+        padding: 0 14px;
+    }
+
+    .card,
+    .panel {
+        padding: 16px;
+    }
+
+    .amount {
+        font-size: 20px;
+    }
+
+    .header h1 {
+        font-size: 26px;
+    }
+
+    .filters {
+        gap: 12px;
+        padding: 14px;
+    }
+
+    .filters input[type="search"],
+    .filters select,
+    .filters label {
+        flex: 1 1 100%;
+        width: 100%;
+    }
+
+    .filters button {
+        flex: 1;
+    }
+
+    .filters a {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+}

@@ -119,8 +119,7 @@ Hisab-Kitab is an ongoing personal project. Authentication, transaction manageme
 
 ## License
 
-No license has been specified yet. All rights remain with the copyright holder unless a license is added to the repository.
-
+This project is licensed under the [MIT License](LICENSE).
 ---
 
 **Hisab-Kitab** — A simple way to track your money.

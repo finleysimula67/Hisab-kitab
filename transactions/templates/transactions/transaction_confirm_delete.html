@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete transaction | Hisab-Kitab</title>
+</head>
+
+<body>
+    <h1>Delete transaction?</h1>
+
+    <p>
+        Are you sure you want to delete this transaction?
+    </p>
+
+    <p>
+        {{ transaction.get_type_display }} —
+        {{ transaction.category }} —
+        Rs. {{ transaction.amount|floatformat:2 }}
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirm delete</button>
+    </form>
+
+    <p>
+        <a href="{% url 'dashboard' %}">Cancel and return to dashboard</a>
+    </p>
+</body>
+
+</html>

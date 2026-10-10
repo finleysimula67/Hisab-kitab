@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Details | Hisab-Kitab</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background: #f5f7fa;
+            color: #1f2937;
+        }
+
+        .panel {
+            background: white;
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px #0000000a;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .income {
+            color: #15803d;
+            background: #dcfce7;
+        }
+
+        .expense {
+            color: #b91c1c;
+            background: #fee2e2;
+        }
+
+        .amount {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .detail {
+            padding: 16px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .label {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .value {
+            font-size: 16px;
+            overflow-wrap: anywhere;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 11px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .primary {
+            color: white;
+            background: #2563eb;
+        }
+
+        .danger {
+            color: white;
+            background: #b91c1c;
+        }
+
+        .secondary {
+            color: #374151;
+            background: #e5e7eb;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Transaction Details</h1>
+
+    <section class="panel">
+        <div class="header">
+            <h2>{{ transaction.category }}</h2>
+
+            {% if transaction.type == "INCOME" %}
+            <span class="badge income">Income</span>
+            {% else %}
+            <span class="badge expense">Expense</span>
+            {% endif %}
+        </div>
+
+        <div class="amount">
+            Rs. {{ transaction.amount|floatformat:2 }}
+        </div>
+
+        <div class="detail">
+            <div class="label">Transaction date</div>
+            <div class="value">
+                {{ transaction.date|date:"F d, Y" }}
+            </div>
+        </div>
+
+        <div class="detail">
+            <div class="label">Category</div>
+            <div class="value">{{ transaction.category }}</div>
+        </div>
+
+        <div class="detail">
+            <div class="label">Note</div>
+            <div class="value">
+                {% if transaction.note %}
+                {{ transaction.note|linebreaksbr }}
+                {% else %}
+                No note added.
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="detail">
+            <div class="label">Created at</div>
+            <div class="value">
+                {{ transaction.created_at|date:"M d, Y - h:i A" }}
+            </div>
+        </div>
+
+        <div class="detail">
+            <div class="label">Last updated</div>
+            <div class="value">
+                {{ transaction.updated_at|date:"M d, Y - h:i A" }}
+            </div>
+        </div>
+
+        <div class="actions">
+            <a class="button primary" href="{% url 'transaction_edit' transaction.pk %}">Edit</a>
+
+            <a class="button danger" href="{% url 'transaction_delete' transaction.pk %}">Delete</a>
+
+            <a class="button secondary" href="{% url 'dashboard' %}">Back to dashboard</a>
+        </div>
+    </section>
+</body>
+
+</html>

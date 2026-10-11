@@ -18,7 +18,7 @@ Hisab-Kitab is a web application for managing personal income and expenses. It h
 ## Tech Stack
 
 - **Language:** Python
-- **Framework:** Django 5.2
+- **Web Framework:** Django 5.2
 - **Database:** SQLite for local development
 - **Frontend:** HTML, CSS, Bootstrap 5
 - **Version Control:** Git and GitHub

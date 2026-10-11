@@ -9,6 +9,7 @@ These notes focus on understanding the code, learning from implementation decisi
 | Topic | Description |
 |---|---|
 | [Django Models and ORM](01-django-models-and-orm.md) | Models, fields, relationships, validation, and saving database records |
+| [Django HTTP Request Lifecycle](02-django-request-lifecycle.md) | URL routing, views, validation, ORM operations, and responses |
 
 ## How to Use These Notes
 

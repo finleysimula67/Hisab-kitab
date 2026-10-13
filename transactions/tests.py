@@ -79,3 +79,40 @@ class TransactionOwnershipTests(TestCase):
         )
 
         self.assertEqual(response.status_code, 404)
+    def test_user_cannot_edit_another_users_transaction(self):
+        self.client.force_login(self.other_user)
+
+        response = self.client.post(
+            reverse(
+                "transaction_edit",
+                kwargs={"pk": self.transaction.pk},
+            ),
+            {
+                "type":"EXPENSE",
+                "amount":"999.00",
+                "category":"Changed",
+                "date": "202-10-10",
+                "note":"Unauthorized change",
+            },
+        )
+        self.assertEqual(response.status_code,404)
+
+        self.transaction.refresh_from_db()
+        self.assertEqual(self.transaction.category, "Food")
+        self.assertEqual(self.transaction.amount,Decimal("250.00"))
+
+
+    def test_user_cannot_delete_anotehr_users_transaction(self):
+        self.client.force_login(self.other_user)
+
+        response = self.client.post(
+            reverse(
+                "transaction_delete",
+                kwargs={"pk":self.transaction.pk},
+            )
+        )
+
+        self.assertEqual(response.status_code,404)
+        self.assertTrue(
+            Transaction.objects.filter(pk=self.transaction.pk).exists()
+        )

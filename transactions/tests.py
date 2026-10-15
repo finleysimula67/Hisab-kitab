@@ -116,3 +116,28 @@ class TransactionOwnershipTests(TestCase):
         self.assertTrue(
             Transaction.objects.filter(pk=self.transaction.pk).exists()
         )
+    def test_owner_can_edit_own_transaction(self):
+        self.client.force_login(self.user)
+
+        response = self.client.post(
+            reverse(
+                "transaction_edit",
+                kwargs={"pk":self.transaction.pk},
+            ),
+            {
+                "type":"EXPENSE",
+                "amount":"200.00",
+                "category":"Groceries",
+                "date":"2026-10-15",
+                "note":"Weekly Shopping",
+            },
+        )
+        if response.status_code == 200:
+         print("FORM ERRORS:", response.context["form"].errors)
+
+        self.assertRedirects(response,reverse("dashboard"))
+
+        self.transaction.refresh_from_db()
+        self.assertEqual(self.transaction.amount,Decimal("200.00"))
+        self.assertEqual(self.transaction.category,"Groceries")
+        self.assertEqual(self.transaction.note,"Weekly Shopping")

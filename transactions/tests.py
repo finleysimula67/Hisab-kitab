@@ -141,3 +141,20 @@ class TransactionOwnershipTests(TestCase):
         self.assertEqual(self.transaction.amount,Decimal("200.00"))
         self.assertEqual(self.transaction.category,"Groceries")
         self.assertEqual(self.transaction.note,"Weekly Shopping")
+
+    def test_owner_can_delete_own_transaction(self):
+        self.client.force_login(self.user)
+
+        response = self.client.post(
+            reverse(
+                "transaction_delete",
+                kwargs={"pk": self.transaction.pk},
+            )
+        )
+
+        self.assertRedirects(response, reverse("dashboard"))
+        self.assertFalse(
+            Transaction.objects.filter(
+                pk = self.transaction.pk
+            ).exists()
+        )

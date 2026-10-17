@@ -1,0 +1,13 @@
+
+services:
+  - type: web
+    name: hisab-kitab-demo
+    runtime: python
+    plan: free
+    buildCommand: bash build.sh
+    startCommand: 'uv run --locked python manage.py migrate --settings=config.production && uv run --locked gunicorn config.wsgi:application --bind 0.0.0.0:$PORT'
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: config.production
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
